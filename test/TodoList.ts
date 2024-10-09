@@ -39,28 +39,28 @@ describe("Todo Test", function () {
     const description = "From DLT Africa";
     await expect(
       todo.connect(otherAccount).createTodo(title, description)
-    ).to.be.revertedWith("You're not allowed"); // Updated revert message to match the contract
+    ).to.be.revertedWith("You're not allowed"); 
   });
 
   it("Should be able to update TodoList as the owner", async function () {
     const { todo, owner } = await loadFixture(deployTodoFixture);
 
-    // First, create a Todo
+   
     const createTitle = "Hello world!";
     const createDescription = "From DLT Africa";
     await todo.connect(owner).createTodo(createTitle, createDescription);
 
-    // Now update the created Todo
+
     const updateTitle = "Updated Hello world!";
     const updateDescription = "Updated from DLT Africa";
     await todo.connect(owner).updateTodo(0, updateTitle, updateDescription);
 
-    // Check if the updated todo is as expected
+
     const updatedTodo = await todo.getTodo(0);
 
     expect(updatedTodo[0]).to.equal(updateTitle);
     expect(updatedTodo[1]).to.equal(updateDescription);
-    expect(updatedTodo[2]).to.equal(2); // Assuming 1 is still the correct status or ID
+    expect(updatedTodo[2]).to.equal(2); 
   });
 
   it("Should not be able to update TodoList if not owner", async function () {
@@ -104,7 +104,7 @@ describe("Todo Test", function () {
   it("Should be able to get All the Todo Lists", async function () {
     const { todo, owner } = await loadFixture(deployTodoFixture);
 
-    // First, create a Todo
+  
     const createTitle1 = "Hello world!";
     const createDescription1 = "From DLT Africa";
     await todo.connect(owner).createTodo(createTitle1, createDescription1);
